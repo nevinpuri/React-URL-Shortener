@@ -4,7 +4,10 @@ class Header extends Component {
   render() {
     return (
       <div className="jumbotron text-center">
-        <h1>Paste App</h1>
+        <h1>
+          React URL Shortener - By
+          <a href="https://github.com/Nevin1901"> Nevin</a>
+        </h1>
       </div>
     );
   }

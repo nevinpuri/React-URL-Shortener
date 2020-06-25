@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../global.css";
 
 class ErrorPage extends Component {
   render() {

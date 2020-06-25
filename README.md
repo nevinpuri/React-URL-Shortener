@@ -2,7 +2,7 @@
 
 ## https://nevin.cc (for now, until I rewrite the website)
 
-![Image of website]("/images/1.png")
+![Image of website](/images/1.png)
 
 Made by: https://github.com/Nevin1901
 

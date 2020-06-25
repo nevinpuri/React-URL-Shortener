@@ -75,7 +75,7 @@ class MainPage extends Component {
   generateShortURL = () => {
     if (this.state.URLCreated === true) {
       axios
-        .post("http://localhost:5000/link", {
+        .post("http://51.210.97.236:5000/link", {
           longURL: this.state.value,
         })
         .then((response) => this.setState({ shortURL: response.data.shortURL }))

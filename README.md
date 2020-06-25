@@ -15,7 +15,7 @@ Client
 ```
 cd client/frontend
 npm i
-npm start OR npm run build and serve -l
+npm run build && serve -l build
 ```
 
 Server

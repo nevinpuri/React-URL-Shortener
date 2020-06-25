@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../Header.jsx";
 import URLShortener from "../URLShortener.jsx";
-import "../index.css";
+import axios from "axios";
 
 class MainPage extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class MainPage extends Component {
     this.state = {
       value: "",
       URLCreated: false,
+      shortURL: "",
     };
   }
   render() {
@@ -20,7 +21,9 @@ class MainPage extends Component {
         <div className="container text-center">
           <form onSubmit={this.handleLinkCreate}>
             <div className="form-group m-2">
-              <h1>
+              <h1
+                className={this.state.URLCreated ? "text-success" : "text-body"}
+              >
                 {this.state.URLCreated
                   ? "Done. Copy the URL Below"
                   : "Enter in a URL"}
@@ -45,6 +48,7 @@ class MainPage extends Component {
               <URLShortener
                 longURL={this.state.value}
                 URLCreated={this.state.URLCreated}
+                shortURL={this.state.shortURL}
               />
             </div>
           </form>
@@ -57,17 +61,26 @@ class MainPage extends Component {
     this.setState({ value: evt.target.value });
   };
 
-  handleLinkCreate = (e) => {
+  handleLinkCreate = async (e) => {
     e.preventDefault();
-    let handleInput = this.state.value;
-    /*if (
-      handleInput.match(
-        /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm
-      )
-    )
-      this.setState({ URLCreated: true }); */
-    this.setState({ URLCreated: true });
-    console.log(this.URLCreated);
+
+    setTimeout(() => {
+      this.generateShortURL();
+    }, 10);
+
+    if (this.state.value != "" && this.state.value.length < 500)
+      this.setState({ URLCreated: true });
+  };
+
+  generateShortURL = () => {
+    if (this.state.URLCreated === true) {
+      axios
+        .post("http://localhost:5000/link", {
+          longURL: this.state.value,
+        })
+        .then((response) => this.setState({ shortURL: response.data.shortURL }))
+        .catch((error) => console.log(error));
+    }
   };
 }
 

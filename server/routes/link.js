@@ -4,7 +4,7 @@ const Link = require("../models/Link");
 const { json } = require("express");
 
 router.get("/", async (req, res) => {
-  res.json({ message: "Enter in a link" });
+  res.json({ message: "Enter in a valid link" });
 });
 
 router.get("/:SlinkURL", async (req, res) => {
@@ -18,9 +18,6 @@ router.get("/:SlinkURL", async (req, res) => {
 
 router.post("/", async (req, res) => {
   let linkRequest = req.body.longURL;
-  if (!linkRequest.startsWith("http")) {
-    res.json({ message: "Error: Invalid Link" });
-  }
   const shortenedLink = generateShortURL(8);
   const link = new Link({
     longURL: req.body.longURL,

@@ -6,7 +6,7 @@ class Redirect extends Component {
     this.parseLink();
   }
 
-  parseLink = async () => {
+  parseLink = () => {
     let searchParam = new URLSearchParams(this.props.location.search).get("q");
     axios
       .get(`http://localhost:5000/link/${searchParam}`)

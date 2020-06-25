@@ -9,7 +9,7 @@ class Redirect extends Component {
   parseLink = () => {
     let searchParam = new URLSearchParams(this.props.location.search).get("q");
     axios
-      .get(`http://51.210.97.236:5000/link${searchParam}`)
+      .get(`https://nevin.cc:5000/link/${searchParam}`)
       .then((recievedData) => window.location.replace(recievedData.data));
   };
 
